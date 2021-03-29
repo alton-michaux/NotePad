@@ -76,7 +76,6 @@ const longestCommonPrefix = function (strs) {
   const commonSet = [...currentDupes].toString()
   //remove commas from string
   const finalString = commonSet.replace(/,/g,"")
-  console.log(finalString)
   return finalString
 };
 
