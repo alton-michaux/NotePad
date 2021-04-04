@@ -118,6 +118,7 @@ const longestCommonPrefix = function (strs) {
   }
 };
 
+//IFFE to run all test cases in one function
 const testCase = (function () {
   console.log(longestCommonPrefix(words));
   console.log(longestCommonPrefix(moreWords));
