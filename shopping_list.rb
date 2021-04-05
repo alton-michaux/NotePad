@@ -7,6 +7,7 @@ def create_list
     hash = {"name" => name, "items" => Array.new}
     return hash
 end
+
 #item addition method
 def add_list_item
     #get user input and remove extra character, store in variable "item_name"
@@ -19,10 +20,24 @@ def add_list_item
     hash = {"name" => item_name, "quantity" => quantity}
     return hash
 end
+
+def add_looper(arr)
+    #add items and quantities to "items" array, which later get appended to the hash
+    loop do
+        puts "Great! Add some items to your list!"
+        arr["items"].push(add_list_item)
+        puts "Do you want to add more? (Y/N) "
+        if gets.chomp.upcase == "N"
+            break
+        end
+    end
+end
+
 #method to print seperator lines
 def print_seperator(character="-")
     puts character * 80
 end
+
 #method that prints comprehensive list of items and quantities
 def print_list(list)
     puts "List: #{list['name']}"
@@ -34,14 +49,13 @@ def print_list(list)
     end
     print_seperator()
 end
+
 #call original list creation method
 list = create_list()
 
-puts "Great! Add some items to your list!"
-#add items and quantities to "items" array, which later get appended to the hash
-list["items"].push(add_list_item)
-list["items"].push(add_list_item)
-list["items"].push(add_list_item)
+#call loop method to add items to the list
+puts add_looper(list)
+
 #return final hash
 puts "Here's your list: \n"
 print_list(list)
