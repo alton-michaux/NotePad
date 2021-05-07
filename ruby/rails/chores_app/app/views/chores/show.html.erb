@@ -5,7 +5,8 @@
   <%= @chore.job %>
   <strong>Description:</strong>
   <%= @chore.description %>
+  <strong>Assigned To:</strong>
+  <%= @chore.child.as_json.values_at('name').join(' ') %>
 </p>
 
-<%= link_to 'Edit', edit_chore_path(@chore) %> |
 <%= link_to 'Back', chores_path %>

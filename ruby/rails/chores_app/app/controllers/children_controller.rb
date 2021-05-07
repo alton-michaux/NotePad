@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class ChildrenController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
   before_action :set_child, only: %i[show edit update destroy]
+  layout 'child_layout'
 
   # GET /children or /children.json
   def index
@@ -66,5 +68,11 @@ class ChildrenController < ApplicationController
   # Only allow a list of trusted parameters through.
   def child_params
     params.require(:child).permit(:name, :age, :chore)
+  end
+
+  def catch_not_found(e)
+    Rails.logger.debug('There was a not found exception.')
+    flash.alert = e.to_s
+    redirect_to children_url
   end
 end

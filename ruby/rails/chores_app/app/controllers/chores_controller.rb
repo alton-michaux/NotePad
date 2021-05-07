@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class ChoresController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
   before_action :set_chore, only: %i[show edit update destroy]
+  layout 'child_layout'
 
   # GET /chores or /chores.json
   def index
@@ -65,6 +67,12 @@ class ChoresController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def chore_params
-    params.require(:chore).permit(:job)
+    params.require(:chore).permit(:job, :description)
+  end
+
+  def catch_not_found(e)
+    Rails.logger.debug('There was a not found exception.')
+    flash.alert = e.to_s
+    redirect_to chores_path
   end
 end
