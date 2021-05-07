@@ -1,1 +1,3 @@
-json.partial! "children/child", child: @child
+# frozen_string_literal: true
+
+json.partial! 'children/child', child: @child

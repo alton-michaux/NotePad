@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Child < ApplicationRecord
-    has_many :chores
+  has_one :chore
 end

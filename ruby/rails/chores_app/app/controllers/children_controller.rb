@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ChildrenController < ApplicationController
-  before_action :set_child, only: %i[ show edit update destroy ]
+  before_action :set_child, only: %i[show edit update destroy]
 
   # GET /children or /children.json
   def index
@@ -7,8 +9,7 @@ class ChildrenController < ApplicationController
   end
 
   # GET /children/1 or /children/1.json
-  def show
-  end
+  def show; end
 
   # GET /children/new
   def new
@@ -16,8 +17,7 @@ class ChildrenController < ApplicationController
   end
 
   # GET /children/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /children or /children.json
   def create
@@ -25,7 +25,7 @@ class ChildrenController < ApplicationController
 
     respond_to do |format|
       if @child.save
-        format.html { redirect_to @child, notice: "Child was successfully created." }
+        format.html { redirect_to @child, notice: 'Child was successfully created.' }
         format.json { render :show, status: :created, location: @child }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class ChildrenController < ApplicationController
   def update
     respond_to do |format|
       if @child.update(child_params)
-        format.html { redirect_to @child, notice: "Child was successfully updated." }
+        format.html { redirect_to @child, notice: 'Child was successfully updated.' }
         format.json { render :show, status: :ok, location: @child }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,19 +51,20 @@ class ChildrenController < ApplicationController
   def destroy
     @child.destroy
     respond_to do |format|
-      format.html { redirect_to children_url, notice: "Child was successfully destroyed." }
+      format.html { redirect_to children_url, notice: 'Child was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_child
-      @child = Child.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def child_params
-      params.require(:child).permit(:name)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_child
+    @child = Child.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def child_params
+    params.require(:child).permit(:name, :age, :job)
+  end
 end
