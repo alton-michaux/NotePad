@@ -5,7 +5,7 @@ class CreateChildren < ActiveRecord::Migration[5.0]
     create_table :children do |t|
       t.string :name
 
-      t.timestamps
     end
+    t.timestamps
   end
 end

@@ -5,9 +5,10 @@
   <%= @child.name %>
   <strong>Age:</strong>
   <%= @child.age %>
-  <strong>Job:</strong>
-  <%= @child.job %>
+  <strong>Chore:</strong>
+  <%= render partial: 'chores/convert', locals: { chore: @child.chore } %>
 </p>
 
 <%= link_to 'Edit', edit_child_path(@child) %> |
-<%= link_to 'Back', children_path %>
+<%= link_to 'Back', children_path %> |
+<%= link_to 'Chore Description', chores_path %>
