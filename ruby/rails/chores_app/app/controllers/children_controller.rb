@@ -2,6 +2,7 @@
 
 class ChildrenController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
+  rescue_from StandardError, with: :catch_no_method
   before_action :set_child, only: %i[show edit update destroy]
   layout 'child_layout'
 
@@ -72,6 +73,12 @@ class ChildrenController < ApplicationController
 
   def catch_not_found(e)
     Rails.logger.debug('There was a not found exception.')
+    flash.alert = e.to_s
+    redirect_to children_url
+  end
+
+  def catch_no_method(e)
+    Rails.logger.debug("There was a 'NoMethodError', the object was created without all it's attributes.")
     flash.alert = e.to_s
     redirect_to children_url
   end
