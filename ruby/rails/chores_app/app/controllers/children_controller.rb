@@ -59,6 +59,10 @@ class ChildrenController < ApplicationController
     end
   end
 
+  def count
+    Children.size
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
