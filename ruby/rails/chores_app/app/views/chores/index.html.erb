@@ -1,27 +1,35 @@
+<div class="container-lg container-fluid bg-light bg-gradient">
+
 <p id="notice"><%= notice %></p>
 
-<h1>Chores</h1>
+<h1 class="text-muted row px-3">Chores</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Job</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @chores.each do |chore| %>
-      <tr>
-        <td><%= chore.job %></td>
-        <td><%= chore.description %></td>
-        <td><%= link_to 'Show', chore %></td>
+<div class="row">
+  <table class="table table-dark table-striped table-hover table-bordered">
+    <thead>
+      <tr class="table-secondary text-center">
+        <th>Job</th>
+        <th>Description</th>
+        <th colspan="3">Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @chores.each do |chore| %>
+        <tr class="text-center">
+          <td><%= chore.job %></td>
+          <td><%= chore.description %></td>
+          <td><%= link_to 'View', chore %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div> <!--/row-->
 
 <br>
 
-<%= link_to 'Children', children_path %>
+<div class="col px-3 text-end">
+  <%= link_to 'Children', children_path %>
+</div> <!--row-->
+
+</div> <!--/container-->

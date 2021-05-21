@@ -11,17 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field text-center m-3">
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
 
-  <div class="field">
+  <div class="field text-center m-3">
     <%= f.label :age %>
     <%= f.text_field :age %>
   </div>
   
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions text-center m-3">
+    <button type="button" class="btn btn-success">
+      <%= f.submit %>
+    </button>
   </div>
 <% end %>

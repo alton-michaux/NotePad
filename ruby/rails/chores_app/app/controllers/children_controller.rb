@@ -82,7 +82,7 @@ class ChildrenController < ApplicationController
   end
 
   def catch_no_method(e)
-    Rails.logger.debug("There was a 'NoMethodError', the object was created without all it's attributes.")
+    Rails.logger.debug("There was a 'NoMethodError': #{e}(the object may have been created without all it's attributes.)")
     flash.alert = e.to_s
     redirect_to children_url
   end
