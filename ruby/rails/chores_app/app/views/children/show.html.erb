@@ -18,7 +18,7 @@
         <tr class="text-center">
           <td><%= @child.name %></td>
           <td><%= @child.age %></td>
-          <td><%= render partial: 'chores/convert', locals: { chore: @child.chore } %></td>
+          <td><%= render partial: 'chores/convert', locals: { chores: @child.chores } %></td>
         </tr>
       </tbody>
   </table>

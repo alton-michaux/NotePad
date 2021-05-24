@@ -59,10 +59,6 @@ class ChildrenController < ApplicationController
     end
   end
 
-  def count
-    Children.size
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -72,7 +68,7 @@ class ChildrenController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def child_params
-    params.require(:child).permit(:name, :age, :chore)
+    params.require(:child).permit(:name, :age)
   end
 
   def catch_not_found(e)
@@ -82,7 +78,7 @@ class ChildrenController < ApplicationController
   end
 
   def catch_no_method(e)
-    Rails.logger.debug("There was a 'NoMethodError': #{e}(the object may have been created without all it's attributes.)")
+    Rails.logger.debug("There was a 'NoMethodError': #{e} (the object may have been created without all it's attributes.)")
     flash.alert = e.to_s
     redirect_to children_url
   end

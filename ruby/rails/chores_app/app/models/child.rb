@@ -7,5 +7,5 @@ class Child < ApplicationRecord
   validates :id, presence: true
   validates :chore, presence: false
 
-  has_one :chore
+  has_many :chores
 end

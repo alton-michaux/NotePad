@@ -21,8 +21,8 @@
           <td><%= child.name %></td>
           <td><%= child.age %></td>
           <td class="mark">
-            <% if child.chore.present? %>
-              <strong><%= render partial: 'chores/convert', locals: { chore: child.chore } %></strong>
+            <% if child.chores.present? %>
+              <strong><%= render partial: 'chores/convert', locals: { Chores: child.chores } %></strong>
             <% end %>
           </td>
           <td><%= link_to 'View', child %></td>
