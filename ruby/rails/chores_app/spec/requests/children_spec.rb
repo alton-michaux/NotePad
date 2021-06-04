@@ -39,7 +39,6 @@ RSpec.describe 'ChildControllers', type: :request do
     it 'saves a new child and redirects to :show path for child' do
       child_params = FactoryBot.attributes_for(:child)
       expect { post children_path, params: { child: child_params } }.to change(Child, :count)
-      # byebug
       expect(response).to redirect_to child_path(id: Child.last.id)
     end
   end
