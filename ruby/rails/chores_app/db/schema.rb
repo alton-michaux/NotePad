@@ -14,6 +14,7 @@
 
 ActiveRecord::Schema.define(version: 20_210_522_011_148) do
   create_table 'children', force: :cascade do |t|
+    t.integer  'child_id', null: false
     t.string   'name'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
@@ -23,6 +24,7 @@ ActiveRecord::Schema.define(version: 20_210_522_011_148) do
   end
 
   create_table 'chores', force: :cascade do |t|
+    t.integer  'chore_id', null: false
     t.string   'job'
     t.datetime 'created_at',  null: false
     t.datetime 'updated_at',  null: false

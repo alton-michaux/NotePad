@@ -15,8 +15,4 @@ RSpec.describe Child, type: :model do
     subject.age.to_s.include?('/\d+')
     expect(subject).to be_valid
   end
-  it 'is not valid without an id' do
-    subject.id = nil
-    expect(subject).to_not be_valid
-  end
 end
