@@ -1,27 +1,33 @@
-<%= form_for(chore) do |f| %>
-  <% if chore.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(chore.errors.count, "error") %> prohibited this chore from being saved:</h2>
+<div class="row mb-3">
+  <%= form_for(chore) do |f| %>
+    <% if chore.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(chore.errors.count, "error") %> prohibited this chore from being saved:</h2>
 
-      <ul>
-      <% chore.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% chore.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-label">
+      <%= f.label :job %>
+    </div>
+    <div class="form-control">
+      <%= f.text_field :job %>
+    </div>
+
+    <div class="form-label">
+      <%= f.label :description %>
+    </div>
+    <div class="form-control">
+      <%= f.text_field :description %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :job %>
-    <%= f.text_field :job %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

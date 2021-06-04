@@ -5,9 +5,9 @@
 <h1 class="text-muted row px-3">Chores</h1>
 
 <div class="row">
-  <table class="table table-dark table-striped table-hover table-bordered">
+  <table class="table table-striped table-hover table-bordered">
     <thead>
-      <tr class="table-secondary text-center">
+      <tr class="table-dark text-center">
         <th>Job</th>
         <th>Description</th>
         <th colspan="3">Actions</th>
@@ -28,8 +28,10 @@
 
 <br>
 
-<div class="col px-3 text-end">
-  <%= link_to 'Children', children_path %>
+<div class="row">
+  <div class="col mx-4">
+    <%= link_to 'Children', children_path %>
+  </div> 
 </div> <!--row-->
 
 </div> <!--/container-->

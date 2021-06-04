@@ -1,29 +1,37 @@
-<%= form_for(child) do |f| %>
-  <% if child.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(child.errors.count, "error") %> prohibited this child from being saved:</h2>
+<div class="row">
+  <div class="mb-3">
+    <%= form_for(child) do |f| %>
+      <% if child.errors.any? %>
+        <div class="alert alert-warning col-lg-6" id="error_explanation">
+          <h3><%= pluralize(child.errors.count, "error") %> prohibited this child from being saved:</h2>
 
-      <ul>
-      <% child.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% child.errors.full_messages.each do |message| %>
+            <li><strong><%= message %></strong></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field text-center m-3">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
+      <div class="form-label col-lg-4">
+        <%= f.label :name %>
+      </div>
+      <div class="form-control-sm col-lg-4">
+        <%= f.text_field :name %>
+      </div>
 
-  <div class="field text-center m-3">
-    <%= f.label :age %>
-    <%= f.text_field :age %>
+      <div class="form-label col-lg-4">
+        <%= f.label :age %>
+      </div>
+      <div class="form-control-sm col-lg-4">
+        <%= f.text_field :age %>
+      </div>
+      
+      <div class="actions m-3 col-lg-4">
+        <button type="button" class="btn">
+          <%= f.submit %>
+        </button>
+      </div>
+    <% end %>
   </div>
-  
-  <div class="actions text-center m-3">
-    <button type="button" class="btn btn-success">
-      <%= f.submit %>
-    </button>
-  </div>
-<% end %>
+</div>

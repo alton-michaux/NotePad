@@ -5,7 +5,7 @@ class Child < ApplicationRecord
   validates :age,  presence: true
   validates :age, numericality: { only_integer: true }
   validates :id, presence: true
-  validates :chore, presence: false
+  validates :chore_id, presence: false
 
   has_many :chores
 end

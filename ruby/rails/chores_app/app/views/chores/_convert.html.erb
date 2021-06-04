@@ -1,1 +1,3 @@
-<%= chores.as_json.values_at(0).join(',') %>
+<% chores.each do |chore| %>
+    <%= chore.job.to_s %>
+<% end %>

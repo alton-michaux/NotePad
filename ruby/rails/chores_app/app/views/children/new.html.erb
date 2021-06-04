@@ -1,5 +1,13 @@
-<h1>New Child</h1>
+<div class="container-lg">
 
-<%= render 'form', child: @child %>
+    <h1 class="row">New Child</h1>
 
-<%= link_to 'Back', children_path %>
+    <%= render 'form', child: @child %>
+
+    <div class="row">
+        <div class="col">
+            <%= link_to 'Back', children_path %>
+        </div>
+    </div>
+
+</div>
