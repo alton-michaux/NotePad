@@ -3,7 +3,6 @@
 class ChoresController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
   before_action :set_chore, only: %i[show edit update destroy]
-  after_create :child_id
   layout 'child_layout'
 
   # GET /chores or /chores.json
