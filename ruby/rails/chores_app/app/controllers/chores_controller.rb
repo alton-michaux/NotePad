@@ -30,6 +30,7 @@ class ChoresController < ApplicationController
         format.html { redirect_to @chore, notice: 'Chore was successfully created.' }
         format.json { render :show, status: :created, location: @chore }
       else
+        puts @chore.errors.to_a
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @chore.errors, status: :unprocessable_entity }
       end
@@ -67,7 +68,7 @@ class ChoresController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def chore_params
-    params.require(:chore).permit(:job, :description)
+    params.require(:chore).permit(:job, :description, :child_id)
   end
 
   def catch_not_found(e)

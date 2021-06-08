@@ -20,6 +20,8 @@
           <td><%= chore.job %></td>
           <td><%= chore.description %></td>
           <td><%= link_to 'View', chore %></td>
+          <td><%= link_to 'Edit', edit_chore_path(chore) %></td>
+          <td><%= link_to 'Delete', chore, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
@@ -30,6 +32,7 @@
 
 <div class="row">
   <div class="col mx-4">
+    <%= link_to 'New Chore', new_chore_path %>
     <%= link_to 'Children', children_path %>
   </div> 
 </div> <!--row-->
