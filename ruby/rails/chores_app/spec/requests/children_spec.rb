@@ -42,4 +42,14 @@ RSpec.describe 'ChildControllers', type: :request do
       expect(response).to redirect_to child_path(id: Child.last.id)
     end
   end
+  describe 'post children_path with invalid info' do
+    it 'does not save a new entry or redirect' do
+      child_params = FactoryBot.attributes_for(:child)
+      child_params.delete(:age)
+      expect do
+        post children_path, params: { child: child_params }
+      end.to_not change(Child, :count)
+      expect(response).to render_template(:new)
+    end
+  end
 end
