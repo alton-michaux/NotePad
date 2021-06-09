@@ -31,6 +31,7 @@ class ChildrenController < ApplicationController
         format.html { redirect_to @child, notice: 'Child was successfully created.' }
         format.json { render :show, status: :created, location: @child }
       else
+        puts "save error: #{@child.errors.to_a} \n #{@child.as_json}"
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @child.errors, status: :unprocessable_entity }
       end
@@ -44,6 +45,7 @@ class ChildrenController < ApplicationController
         format.html { redirect_to @child, notice: 'Child was successfully updated.' }
         format.json { render :show, status: :ok, location: @child }
       else
+        puts "update error: #{@child.errors.to_a}"
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @child.errors, status: :unprocessable_entity }
       end
