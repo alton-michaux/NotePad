@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'ChildrenControllers', type: :request do
+RSpec.describe 'ChildrenControllers', type: :request, focus: true do
   describe 'get children_path' do
     it 'renders the index view' do
       FactoryBot.create_list(:child, 5)
@@ -52,13 +52,30 @@ RSpec.describe 'ChildrenControllers', type: :request do
       expect(response).to render_template(:new)
     end
   end
-  describe 'put child_path with valid data', focus: true do
+  describe 'put child_path with valid data' do
     it 'updates an entry and redirects to the show path for child' do
       child = FactoryBot.create(:child)
-      child.update({ 'age' => 9 })
-      # byebug
+      child.update({ 'chore_id' => 9 })
       expect { put child_path(id: child[:id]), params: { child: child } }.to_not change(Child, :count)
       expect(response).to redirect_to child_path({ id: Child.last.id })
+    end
+  end
+  describe 'put child_path with invalid data' do
+    it 'does not save or redirect' do
+      child = FactoryBot.create(:child)
+      child.update({ 'age' => '' })
+      expect { put child_path(id: child[:id]), params: { child: child } }.to_not change(Child, :count)
+      expect(response).to render_template(:edit)
+    end
+  end
+  describe 'delete child record' do
+    it 'deletes the child record' do
+      child = FactoryBot.create(:child)
+      child.destroy
+      expect do
+        get children_url
+      end.to_not change(Child, :count)
+      expect(response).to render_template(:index)
     end
   end
 end
