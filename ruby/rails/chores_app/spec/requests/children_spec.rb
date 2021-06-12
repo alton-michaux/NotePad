@@ -46,35 +46,34 @@ RSpec.describe 'ChildrenControllers', type: :request do
     it 'does not save a new entry or redirect' do
       child_params = FactoryBot.attributes_for(:child)
       child_params.delete(:age)
-      expect do
-        post children_path, params: { child: child_params }
-      end.to_not change(Child, :count)
+      expect { post children_path, params: { child: child_params } }.to_not change(Child, :count)
       expect(response).to render_template(:new)
     end
   end
-  describe 'put child_path with valid data', focus: true do
+  describe 'put child_path with valid data' do
     it 'updates an entry and redirects to the show path for child' do
       child = FactoryBot.create(:child)
-      child.update({ 'chore_id' => 9 })
-      expect { put child_path(id: child[:id]), params: { child: child } }.to_not change(Child, :count)
-      expect(response).to redirect_to child_path({ id: Child.last.id })
+      expect { put child_path(id: child[:id]), params: { child: {chore_id: 9} } }.to_not change(Child, :count)
+      child.reload
+      expect(child.chore_id).to eq(9)
+      expect(response).to redirect_to(child)
     end
   end
   describe 'put child_path with invalid data' do
     it 'does not save or redirect' do
       child = FactoryBot.create(:child)
-      child.update({ 'age' => '' })
-      expect { put child_path(id: child[:id]), params: { child: child } }.to_not change(Child, :count)
+      expect { put child_path(id: child[:id]), params: { child: {name: ' '} } }.to_not change(Child, :count)
+      child.reload
       expect(response).to render_template(:edit)
     end
   end
   describe 'delete child record' do
-    it 'deletes the child record' do
+    it 'deletes the child record and any associated chores' do
       child = FactoryBot.create(:child)
+      FactoryBot.create(:chore, child_id: child.id)
       child.destroy
-      expect do
-        get children_url
-      end.to_not change(Child, :count)
+      expect(child.chores).to be_empty
+      expect { get children_url }.to_not change(Child, :count)
       expect(response).to render_template(:index)
     end
   end

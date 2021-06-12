@@ -44,4 +44,37 @@ RSpec.describe 'Chores', type: :request do
       expect(response).to redirect_to chore_path(id: Chore.last.id)
     end
   end
+  describe 'post chores_path with invalid data' do
+    it 'does not save or redirect' do
+      chore_params = FactoryBot.attributes_for(:chore, child_id: 'child.id')
+      expect { post chores_path, params: { chore: chore_params } }.to_not change(Chore, :count)
+      expect(response).to render_template(:new)
+    end
+  end
+  describe 'put chore_path with valid data' do
+    it 'updates a chore and redirects to the :show path' do
+      chore = FactoryBot.create(:chore)
+      expect { put chore_path(id: chore.id), params: { chore: { job: 'Shoveling' } } }.to_not change(Chore, :count)
+      chore.reload
+      expect(chore.job).to eq('Shoveling')
+      expect(response).to redirect_to(chore)
+    end
+  end
+  describe 'put chore_path with invalid data' do
+    it 'does not update or redirect' do
+      chore = FactoryBot.create(:chore)
+      expect { put chore_path(id: chore.id), params: { chore: { description: '' } } }.to_not change(Chore, :count)
+      chore.reload
+      expect(response).to render_template(:edit)
+    end
+  end
+  describe 'delete chore', focus: true do
+    it 'deletes the chore record and does not delete the child record' do
+      chore = FactoryBot.create(:chore)
+      child = chore.child
+      chore.delete
+      expect { get chores_path }.to_not change(Chore, :count)
+      expect(child).to be_valid
+    end
+  end
 end
