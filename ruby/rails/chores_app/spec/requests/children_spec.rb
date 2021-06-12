@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'ChildrenControllers', type: :request, focus: true do
+RSpec.describe 'ChildrenControllers', type: :request do
   describe 'get children_path' do
     it 'renders the index view' do
       FactoryBot.create_list(:child, 5)
@@ -52,7 +52,7 @@ RSpec.describe 'ChildrenControllers', type: :request, focus: true do
       expect(response).to render_template(:new)
     end
   end
-  describe 'put child_path with valid data' do
+  describe 'put child_path with valid data', focus: true do
     it 'updates an entry and redirects to the show path for child' do
       child = FactoryBot.create(:child)
       child.update({ 'chore_id' => 9 })
