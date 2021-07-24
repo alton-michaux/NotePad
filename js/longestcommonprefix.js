@@ -25,51 +25,12 @@ const rareWords = ["a"]; //should return "a"
 const weirdWords = ["b", "b"]; //should return "b"
 const dumbWords = ["d", "d", "x"]; //should return empty string
 
-//function that removes unique value from an array
-const removeUnique = (arr) => {
-  if (arr.length <= 1) {
-    const currentSet = new Set(arr);
-    // console.log(currentSet)
-    return currentSet;
-  } else {
-    // console.log(arr)
-    //new array to store duplicates
-    const newArr = [];
-    //loop to iterate over all characters in array derived from original "words" array
-    for (i = 0; i < arr.length; i++) {
-      //count variable to keep up with repeat characters
-      let count = 0;
-      //second loop for checking values against original character value (i)
-      for (j = 0; j < arr.length; j++) {
-        // console.log(i)
-        //if value is the same, count is incremented by 1
-        if (arr[i] == arr[j]) {
-          count++;
-          // console.log(`constant: ${arr[i]} ${i}, variable(compare to): ${arr[j]} ${j}, count: ${count}`)
-        }
-        //if the value is duplicated enough (count) it gets added to the array
-        if (count > 1) {
-          // console.log(arr)
-          newArr.push(arr[i]);
-          // console.log(newArr)
-        }
-      }
-    }
-    // console.log(newArr)
-
-    //now apply a set on the current array to only display unique values
-    const currentSet = new Set(newArr);
-    // console.log(currentSet)
-    return currentSet;
-  }
-};
-
 const longestCommonPrefix = function (strs) {
   //create an array to store values from original strings
   const current = [];
   //loop through WORDS (inputs) to check individual letter patterns
   for (let i = 0; i < strs.length; i++) {
-    // console.log(strs[i], strs[i].length)
+    // console.log(`word: ${strs[i]}, word length: ${strs[i].length} letter(s), array length: ${strs.length} words`)
     //loop through LETTERS (individually)
     for (let j = 0; j <= strs[i].length; j++) {
       //store individual letters in seperate variable
@@ -80,11 +41,11 @@ const longestCommonPrefix = function (strs) {
         // console.log(current)
         break
       }
-      //this line tells the program not to run this code until it after it runs the first word
+      //this line tells the program not to run this code until after it runs the first word
       if (i > 0) {
         //stores the previous letters in a variable
         let prevLetter = strs[i - 1].charAt(j);
-        //checks to see if the previous letter matches the current letter
+        //checks to see if the previous letter matches the current letter (strictly)
         if (letter === prevLetter) {
           //store individual (matching) letters in seperate array created earlier
           current.push(letter);
@@ -108,8 +69,9 @@ const longestCommonPrefix = function (strs) {
     const finalString = newString.replace(/,/g, "");
     return finalString;
   } else {
-    const currentDupes = removeUnique(current);
-    //   console.log([...currentDupes].toString())
+    //takes the current array and passes it through a function that removes unique chars (letters that only occur once)
+    const currentDupes = removeUnique(current, strs);
+    // console.log([...currentDupes].toString())
     //convert new set to an array and then into a string
     const newString = [...currentDupes].toString();
     //remove commas from string
@@ -118,13 +80,52 @@ const longestCommonPrefix = function (strs) {
   }
 };
 
+//function that removes unique value from an array
+const removeUnique = (arr, wordsArr) => {
+  if (arr.length < 2) {
+    const currentSet = new Set(arr);
+    // console.log(currentSet)
+    return currentSet;
+  } else {
+    // console.log(arr)
+    //new array to store duplicates
+    const newArr = [];
+    //loop to iterate over all letters in array derived from original "words" array
+    for (i = 0; i < arr.length; i++) {
+      //count variable to keep up with repeat characters
+      let count = 0;
+      //second loop for checking values against original character value (i)
+      for (j = 0; j < arr.length; j++) {
+        // console.log(i)
+        //if value is the same, count is incremented by 1
+        if (arr[i] == arr[j]) {
+          count++;
+          // console.log(`constant: ${arr[i]} ${i}, variable(compare to): ${arr[j]} ${j}, count: ${count}`)
+        }
+        //if the value is duplicated enough (count) it gets added to the array
+        if (count == (wordsArr.length - 1)) {
+          // console.log(arr)
+          newArr.push(arr[i]);
+          // console.log(newArr)
+        }
+      }
+    }
+    // console.log(newArr)
+
+    //now apply a set on the current array to only display unique values
+    const currentSet = new Set(newArr);
+    // console.log(currentSet)
+    return currentSet;
+  }
+};
+
 //IFFE to run all test cases in one function
 const testCase = (function () {
-  console.log(longestCommonPrefix(words));
-  console.log(longestCommonPrefix(moreWords));
-  console.log(longestCommonPrefix(lastWords));
-  console.log(longestCommonPrefix(testWords));
-  console.log(longestCommonPrefix(rareWords));
-  console.log(longestCommonPrefix(weirdWords));
-  console.log(longestCommonPrefix(dumbWords));
+  console.log(longestCommonPrefix(words)); //should return "do"
+  console.log(longestCommonPrefix(moreWords)); //should return empty string
+  console.log(longestCommonPrefix(lastWords)); //should return "fl"
+  console.log(longestCommonPrefix(testWords)); //should return "br"
+  console.log(longestCommonPrefix(rareWords)); //should return "a"
+  console.log(longestCommonPrefix(weirdWords)); //should return "b"
+  console.log(longestCommonPrefix(dumbWords)); //should return empty string
 })();
