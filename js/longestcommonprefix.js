@@ -19,18 +19,17 @@
 
 const words = ["donkey", "donald", "domain", "dormant"]; //should return "do"
 const moreWords = ["mister", "perriwinkle", "mustard", "cherri"]; //should return empty string
-const lastWords = ["flower", "flow", "flight"]; //should return "fl"
+const niceWords = ["flower", "flow", "flight"]; //should return "fl"
 const testWords = ["brown", "broman", "brownie", "bridge"]; //should return "br"
-const rareWords = ["a"]; //should return "a"
+const notWords = ["a"]; //should return "a"
 const weirdWords = ["b", "b"]; //should return "b"
-const dumbWords = ["d", "d", "x"]; //should return empty string
+const bigWords = ["volcano", "volatile", "volunteer", "volkswagen"]; //should return "vol"
 
 const longestCommonPrefix = function (strs) {
   //create an array to store values from original strings
   const current = [];
   //loop through WORDS (inputs) to check individual letter patterns
   for (let i = 0; i < strs.length; i++) {
-    // console.log(`word: ${strs[i]}, word length: ${strs[i].length} letter(s), array length: ${strs.length} words`)
     //loop through LETTERS (individually)
     for (let j = 0; j <= strs[i].length; j++) {
       //store individual letters in seperate variable
@@ -38,7 +37,6 @@ const longestCommonPrefix = function (strs) {
       //check for empty or single character strings
       if (strs.length <= 1) {
         current.push(letter);
-        // console.log(current)
         break
       }
       //this line tells the program not to run this code until after it runs the first word
@@ -49,11 +47,6 @@ const longestCommonPrefix = function (strs) {
         if (letter === prevLetter) {
           //store individual (matching) letters in seperate array created earlier
           current.push(letter);
-          // console.log(
-          //   `word: ${strs[i]} letter: ${strs[i].charAt(
-          //     j
-          //   )} array: ${current} `
-          // );
         } else {
           //tells the program to stop as soon as a letter doesn't fit the criteria
           break;
@@ -64,14 +57,12 @@ const longestCommonPrefix = function (strs) {
   //check for double letters (not duplicates)
   if (current[0] == current[1] || current.length < 2) {
     const newString = [...current].toString();
-    // console.log(`newString: ${newString}`)
     //remove commas from string
     const finalString = newString.replace(/,/g, "");
     return finalString;
   } else {
     //takes the current array and passes it through a function that removes unique chars (letters that only occur once)
     const currentDupes = removeUnique(current, strs);
-    // console.log([...currentDupes].toString())
     //convert new set to an array and then into a string
     const newString = [...currentDupes].toString();
     //remove commas from string
@@ -84,10 +75,8 @@ const longestCommonPrefix = function (strs) {
 const removeUnique = (arr, wordsArr) => {
   if (arr.length < 2) {
     const currentSet = new Set(arr);
-    // console.log(currentSet)
     return currentSet;
   } else {
-    // console.log(arr)
     //new array to store duplicates
     const newArr = [];
     //loop to iterate over all letters in array derived from original "words" array
@@ -96,25 +85,19 @@ const removeUnique = (arr, wordsArr) => {
       let count = 0;
       //second loop for checking values against original character value (i)
       for (j = 0; j < arr.length; j++) {
-        // console.log(i)
         //if value is the same, count is incremented by 1
         if (arr[i] == arr[j]) {
           count++;
-          // console.log(`constant: ${arr[i]} ${i}, variable(compare to): ${arr[j]} ${j}, count: ${count}`)
         }
         //if the value is duplicated enough (count) it gets added to the array
         if (count == (wordsArr.length - 1)) {
-          // console.log(arr)
           newArr.push(arr[i]);
-          // console.log(newArr)
         }
       }
     }
-    // console.log(newArr)
 
     //now apply a set on the current array to only display unique values
     const currentSet = new Set(newArr);
-    // console.log(currentSet)
     return currentSet;
   }
 };
@@ -123,9 +106,9 @@ const removeUnique = (arr, wordsArr) => {
 const testCase = (function () {
   console.log(longestCommonPrefix(words)); //should return "do"
   console.log(longestCommonPrefix(moreWords)); //should return empty string
-  console.log(longestCommonPrefix(lastWords)); //should return "fl"
+  console.log(longestCommonPrefix(niceWords)); //should return "fl"
   console.log(longestCommonPrefix(testWords)); //should return "br"
-  console.log(longestCommonPrefix(rareWords)); //should return "a"
+  console.log(longestCommonPrefix(notWords)); //should return "a"
   console.log(longestCommonPrefix(weirdWords)); //should return "b"
-  console.log(longestCommonPrefix(dumbWords)); //should return empty string
+  console.log(longestCommonPrefix(bigWords)); //should return "vol"
 })();
